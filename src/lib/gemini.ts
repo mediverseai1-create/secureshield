@@ -6,7 +6,7 @@ import type { ZodType } from "zod";
  * Uses the Generative Language REST API directly — no SDK, no third-party proxy.
  */
 const BASE = "https://generativelanguage.googleapis.com/v1beta";
-export const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-2.5-flash";
+export const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-3.8-flash";
 
 export class GeminiError extends Error {
   constructor(message: string, public readonly kind: "not_configured" | "rate_limited" | "blocked" | "invalid" | "failed" = "failed") {

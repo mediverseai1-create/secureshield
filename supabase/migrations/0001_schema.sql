@@ -74,7 +74,7 @@ create table if not exists public.invitations (
   org_id uuid not null references public.organizations (id) on delete cascade,
   email text not null,
   role public.org_role not null default 'member' check (role in ('admin', 'member')),
-  token text not null unique default encode(gen_random_bytes(24), 'hex'),
+  token text not null unique default (replace(gen_random_uuid()::text, '-', '') || replace(gen_random_uuid()::text, '-', '')),
   invited_by uuid references auth.users (id) on delete set null,
   expires_at timestamptz not null default (now() + interval '7 days'),
   accepted_at timestamptz,
@@ -589,7 +589,7 @@ begin
     raise exception 'user already belongs to a workspace' using errcode = 'P0001';
   end if;
   _slug := regexp_replace(lower(coalesce(nullif(trim(_name), ''), 'workspace')), '[^a-z0-9]+', '-', 'g');
-  _slug := trim(both '-' from _slug) || '-' || substr(encode(gen_random_bytes(4), 'hex'), 1, 6);
+  _slug := trim(both '-' from _slug) || '-' || substr(replace(gen_random_uuid()::text, '-', ''), 1, 6);
 
   insert into public.organizations (name, slug, industry, country, company_size, created_by)
   values (trim(_name), _slug, _industry, _country, _company_size, auth.uid())

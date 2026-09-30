@@ -28,6 +28,7 @@ await db.exec(`
 `);
 await db.exec(read("0001_schema.sql"));
 await db.exec(read("0002_rls.sql"));
+await db.exec(read("0003_fix_random_source.sql"));
 await db.exec(`
   grant all on all tables in schema public to authenticated, service_role;
   grant select, insert, delete on storage.objects to authenticated;
