@@ -37,21 +37,29 @@ async function call({ system, prompt, file, json, temperature = 0.2 }: CallOptio
   if (file) parts.push({ inlineData: { mimeType: file.mimeType, data: file.base64 } });
   parts.push({ text: prompt });
 
-  let res: Response;
-  try {
-    res = await fetch(`${BASE}/models/${GEMINI_MODEL}:generateContent`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "x-goog-api-key": key },
-      body: JSON.stringify({
-        systemInstruction: { parts: [{ text: system }] },
-        contents: [{ role: "user", parts }],
-        generationConfig: { temperature, ...(json ? { responseMimeType: "application/json" } : {}) },
-      }),
-      signal: AbortSignal.timeout(110_000),
-    });
-  } catch {
-    throw new GeminiError("The AI service did not respond in time. Please try again.");
+  const payload = JSON.stringify({
+    systemInstruction: { parts: [{ text: system }] },
+    contents: [{ role: "user", parts }],
+    generationConfig: { temperature, ...(json ? { responseMimeType: "application/json" } : {}) },
+  });
+  let res: Response | undefined;
+  // Transient 500/503 responses are retried a couple of times before the operation fails (and is refunded).
+  for (let attempt = 0; attempt < 5; attempt++) {
+    try {
+      res = await fetch(`${BASE}/models/${GEMINI_MODEL}:generateContent`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "x-goog-api-key": key },
+        body: payload,
+        signal: AbortSignal.timeout(60_000),
+      });
+    } catch {
+      if (attempt === 4) throw new GeminiError("The AI service did not respond in time. Please try again.");
+      continue;
+    }
+    if (res.status !== 503 && res.status !== 500) break;
+    await new Promise((r) => setTimeout(r, 1500 * (attempt + 1)));
   }
+  if (!res) throw new GeminiError("The AI service did not respond in time. Please try again.");
 
   if (res.status === 429) throw new GeminiError("The AI service is rate limited right now. Please try again shortly.", "rate_limited");
   if (!res.ok) {
