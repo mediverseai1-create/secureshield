@@ -74,7 +74,7 @@ export function MarketingFooter() {
         <div>
           <Logo tone="dark" />
           <p className="mt-4 max-w-sm text-sm text-ink-100/75">
-            Governed revenue intelligence. A sales and revenue platform for organizations that need insight on their pipeline without giving up control of their data.
+            An AI platform that listens to sales calls, helps with follow-up and helps companies grow sales.
           </p>
           <p className="mt-4 text-sm">
             <a className="underline decoration-gold underline-offset-4" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
@@ -156,6 +156,32 @@ export function IsolationDiagram() {
       <figcaption className="mt-4 text-xs text-mute">
         Illustration. Each query runs under the signed-in user&apos;s identity and the database only returns rows whose organization matches one the user belongs to.
       </figcaption>
+    </figure>
+  );
+}
+
+/** Illustration of the sales loop the platform runs. Markup only; no customer data. */
+export function LoopDiagram() {
+  const steps = [
+    ["Listen", "Upload a call recording or transcript. The AI extracts the summary, objections, commitments and next action."],
+    ["Understand", "It reads your pipeline, accounts and leads and scores which deals and leads need attention."],
+    ["Follow up", "It drafts the follow-up and adds it to a queue with the reason behind it."],
+    ["Close", "Your team works the queue, and the weekly briefing shows what moved and what stalled."],
+  ];
+  return (
+    <figure className="border border-line bg-paper-dark/40 p-5 sm:p-6" aria-label="Illustration: the loop from call to follow-up to closed deal">
+      <ol className="space-y-3">
+        {steps.map(([t, d], i) => (
+          <li key={t} className="flex gap-4 border border-ink/20 bg-paper-light p-4">
+            <span className="font-mono text-sm text-gold-deep">0{i + 1}</span>
+            <div>
+              <p className="font-serif text-lg font-semibold">{t}</p>
+              <p className="mt-0.5 text-sm text-mute">{d}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+      <figcaption className="mt-4 text-xs text-mute">Illustration of the workflow. Your team reviews every AI output and makes the decisions.</figcaption>
     </figure>
   );
 }

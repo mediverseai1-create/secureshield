@@ -12,9 +12,9 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       <aside className="hidden flex-col justify-between bg-ink px-12 py-12 text-paper-light lg:flex">
         <Logo tone="dark" size="lg" />
         <div className="max-w-md">
-          <p className="eyebrow !text-gold">Governed revenue intelligence</p>
+          <p className="eyebrow !text-gold">AI for sales teams</p>
           <h2 className="mt-3 font-serif text-3xl leading-tight font-semibold">
-            A boundary only your organization can cross.
+            Hear every call. Follow up on every deal.
           </h2>
           <dl className="mt-8 space-y-5">
             {POINTS.map(([t, d]) => (

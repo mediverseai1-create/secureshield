@@ -5,9 +5,9 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://secureshieldai.click"),
-  title: { default: "SecureShield AI — Governed revenue intelligence", template: "%s · SecureShield AI" },
+  title: { default: "SecureShield AI — AI for sales calls, follow-ups and pipeline", template: "%s · SecureShield AI" },
   description:
-    "SecureShield AI analyses your sales data, calls and accounts and turns them into briefings and next actions, with every workspace isolated at the database level.",
+    "SecureShield AI listens to your sales calls, reads your pipeline and writes the follow-ups and briefings your team needs to close more deals.",
   icons: { icon: "/icon.svg" },
 };
 

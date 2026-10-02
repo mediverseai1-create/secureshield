@@ -76,7 +76,7 @@ export default async function PricingPage() {
 
       <Section tone="ink">
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-3xl leading-tight font-semibold sm:text-4xl">Put AI on your pipeline without opening your data to anyone else.</h2>
+          <h2 className="text-3xl leading-tight font-semibold sm:text-4xl">Put AI on every sales call and every follow-up.</h2>
           <div className="mt-8 flex flex-wrap justify-center gap-3"><GetStarted size="lg" /><SignIn tone="dark" size="lg" /></div>
         </div>
       </Section>

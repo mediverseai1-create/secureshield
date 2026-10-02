@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CONVERSATION_OUTPUTS, GetStarted, IsolationDiagram, MODULES, PlanCards, Section, SectionHead, SignIn } from "@/components/marketing";
+import { CONVERSATION_OUTPUTS, GetStarted, IsolationDiagram, LoopDiagram, MODULES, PlanCards, Section, SectionHead, SignIn } from "@/components/marketing";
 import { PermissionsTable } from "@/components/permissions-table";
 import { isSignedIn } from "@/lib/session";
 
@@ -27,25 +27,25 @@ export default async function HomePage() {
       <Section tone="paper" className="!pb-0">
         <div className="grid items-center gap-12 pb-16 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] lg:pb-24">
           <div>
-            <p className="eyebrow">Governed revenue intelligence</p>
+            <p className="eyebrow">AI for sales teams</p>
             <h1 className="mt-4 text-4xl leading-[1.08] font-semibold tracking-tight sm:text-5xl lg:text-[3.5rem]">
-              AI that reads your entire pipeline, inside a boundary only your organization can cross.
+              The AI that listens to your sales calls and tells your team what to do next.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-mute">
-              SecureShield AI analyses your sales data, calls and accounts and turns them into briefings and next actions, with every workspace isolated at the database level and your data never used to train shared models.
+              SecureShield AI listens to your sales calls, reads your pipeline and accounts, and writes the follow-ups and briefings your team needs to close more deals. Your company’s data stays in a private workspace.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <GetStarted size="lg" />
               <SignIn size="lg" />
             </div>
-            <p className="mt-5 text-sm font-medium tracking-wide text-ink-700">Workspace isolation · Role-based access · Data ownership</p>
+            <p className="mt-5 text-sm font-medium tracking-wide text-ink-700">Call analysis · Follow-ups · Pipeline briefings</p>
           </div>
-          <IsolationDiagram />
+          <LoopDiagram />
         </div>
       </Section>
 
       <Section tone="ink">
-        <SectionHead tone="ink" eyebrow="Three principles" title="Governed by design, not bolted on afterward." />
+        <SectionHead tone="ink" eyebrow="Three principles" title="Your data stays yours. Governed by design, not bolted on afterward." />
         <div className="grid gap-10 md:grid-cols-3">
           {PRINCIPLES.map((p) => (
             <div key={p.t} className="border-t border-gold pt-5">
@@ -115,7 +115,7 @@ export default async function HomePage() {
 
       <Section tone="ink">
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-3xl leading-tight font-semibold sm:text-4xl">Put AI on your pipeline without opening your data to anyone else.</h2>
+          <h2 className="text-3xl leading-tight font-semibold sm:text-4xl">Put AI on every sales call and every follow-up.</h2>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <GetStarted size="lg" />
             <SignIn tone="dark" size="lg" />
